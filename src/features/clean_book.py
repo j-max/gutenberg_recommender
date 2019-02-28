@@ -27,3 +27,10 @@ def book_cleaner(book_id):
     clean_book = re.sub('[cC][hH][aA][pP][tT][eE][rR]', ' ', clean_book)
     print(book_title, len(book_text))
     return clean_book
+
+def sample_cleaner(sample_text):
+    clean_book = re.sub('[”“]', '', sample_text)
+    # remove numbers
+    clean_book = re.sub('\w*\d\w*', ' ', clean_book)
+    clean_book = re.sub('[cC][hH][aA][pP][tT][eE][rR]', ' ', clean_book)
+    return clean_book

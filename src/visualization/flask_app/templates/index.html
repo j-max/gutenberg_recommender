@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gutenberg Recommender</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+</head>
+<body>
+	<h1>Paste an excerpt of a book into the box below.  The longer the better.</h1>
+    <form action='/recommend_book/' method='post'>
+      
+           <textarea name="sample_text" rows="14" cols="150" wrap="soft"> </textarea>
+
+     <button type="submit" class="button">
+    	What should I read?
+  	 </button>
+    </form>
+  {% if message %}
+  	<h2>{{message[0]}}</h2>
+  	<h2>{{message[1]}}</h2>
+  	<h2>{{message[2]}}</h2>
+  {% endif %}
+</body>
+</html>

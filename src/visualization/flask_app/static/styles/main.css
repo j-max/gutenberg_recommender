@@ -1,0 +1,10 @@
+body {
+  background-color: #FFCC99;
+}
+
+.text_input {
+	width: 50%;
+	height: 300px;
+	wrap:'hard';
+}
+
