@@ -24,6 +24,8 @@ with open('../../models/doc_lsa.pk', 'rb') as read_file:
 with open('book_titles.pk', 'rb') as read_file:
 	book_titles = pickle.load(read_file)
 
+with open('dict_with_urls.pk', 'rb') as read_file:
+	books_for_dict = pickle.load(read_file)
 #################apps for flask###################
 
 def recommender(text_from_form):
@@ -63,5 +65,13 @@ def cosine_recommender(text_from_form):
 	a= cosine_similarity(doc_for_k)
 
 	top_cos_sim = np.argsort(a[-1])[:-1]
-	return ([book_titles[top_cos_sim[-1]], book_titles[top_cos_sim[-2]], book_titles[top_cos_sim[-3]]])
+
+	top_urls = [books_for_dict[book_titles[top_cos_sim[-1]]][1], 
+				books_for_dict[book_titles[top_cos_sim[-2]]][1], 
+				books_for_dict[book_titles[top_cos_sim[-3]]][1]]
+
+	titles_for_flask = [book_titles[top_cos_sim[-1]], book_titles[top_cos_sim[-2]], book_titles[top_cos_sim[-3]]]
 	
+
+	# return ([book_titles[top_cos_sim[-1]], book_titles[top_cos_sim[-2]], book_titles[top_cos_sim[-3]]])
+	return [top_urls, titles_for_flask]

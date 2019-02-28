@@ -15,9 +15,9 @@
   	 </button>
     </form>
   {% if message %}
-  	<h2>{{message[0]}}</h2>
-  	<h2>{{message[1]}}</h2>
-  	<h2>{{message[2]}}</h2>
+  	<a href={{message[0][0]}}>1: {{message[1][0]}}</a><br>
+  	<a href={{message[0][1]}}>2: {{message[1][1]}}</a><br>
+  	<a href={{message[0][2]}}>3: {{message[1][2]}}</a><br>
   {% endif %}
 </body>
 </html>
