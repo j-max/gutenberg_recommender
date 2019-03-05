@@ -1,0 +1,25 @@
+import sys
+sys.path.insert(0, '../features/')
+sys.path.insert(0, '../data/')
+sys.path.insert(0, '../../data/processed/')
+import spacy_lemmer
+from clean_book import book_cleaner
+from book_info_for_vars import get_book_info
+import pickle
+
+
+book_info = get_book_info()
+books_for_dict, book_nums, book_titles, book_authors = (book_info[0],
+                                                        book_info[1],
+                                                        book_info[2],
+                                                        book_info[3])
+
+def update_lemma_pickle():
+    books_for_lemming = [book_cleaner(str(book)) for book in book_nums]
+    spacy_lemmed_text = [spacy_lemmer.spacy_lem_text(book) for book in books_for_lemming]
+    
+#    with open('../data/processed/spacy_lemmed_train_text_500000.pickle', "rb") as read_file:
+#        space_lemmed_text = pickle.load(read_file)
+    with open('../data/processed/spacy_lemmed_new_500000.pickle', "wb") as output_file:
+        pickle.dump(spacy_lemmed_text, output_file)
+        

@@ -25,6 +25,20 @@ def book_cleaner(book_id):
     # remove numbers
     clean_book = re.sub('\w*\d\w*', ' ', clean_book)
     clean_book = re.sub('[cC][hH][aA][pP][tT][eE][rR]', ' ', clean_book)
+    clean_book = re.sub('[tT][hH][yoOeE][\suUeE]', ' ', clean_book)
+    clean_book = re.sub('[hH][a][ts][th]', ' ', clean_book)
+    clean_book = re.sub('[dD][o][st][th]', ' ', clean_book)
+    clean_book = re.sub('[Tt][h][i][n][e]', ' ', clean_book)
+    clean_book = re.sub('[Ww][i][l][t]', ' ', clean_book)
+    clean_book = re.sub('[Ww][h][i][l][s][t]', ' ', clean_book)
+    clean_book = re.sub('[Oo][h]', ' ', clean_book)
+    clean_book = re.sub('[yY][e]', ' ', clean_book)
+    clean_book = re.sub('[nN][a][y]', ' ', clean_book)
+    clean_book = re.sub('[\s][Yy][e][s][\s]', ' ', clean_book)
+    clean_book = re.sub('[\s][Nn][a][y][\s]', ' ', clean_book)
+    clean_book = re.sub('[\s][Ss][i][r][\s\.\,]', ' ', clean_book)
+    clean_book = re.sub('[\s][eE][r][e][\s\.\,]', ' ', clean_book)
+
     print(book_title, len(book_text))
     return clean_book
 
