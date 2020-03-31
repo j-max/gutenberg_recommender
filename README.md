@@ -1,57 +1,18 @@
 gutenberg_recommender
 ==============================
 
-A short description of the project.
+> The goal of this project is to use natural language processing to make [Project Gutenberg](https://www.gutenberg.org/) reading recommendations.  Project Gutenberg is an online source of free eBooks. The end product is a Flask app which allows a user to submit a snippet of text and recieve three texts that they might enjoy reading for free on Project Gutenberg. 
 
-Project Organization
-------------
+Data
+==============================
+The data for this project includes a selection of the Top 100 books read on Project Gutenberg as tracked in February 2019.  The text of these books were scraped from the site using Selenium (at a respectful ping rate) and beautiful soup. The raw book text was then stored in a Mongo database. See [here](notebooks/Gut_scrape.ipynb') for the associated code.
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
+Text Preparation
+==============================
 
+I use Spacy to tag the text with part of speech and [lemmatize](./src/features/spacy_lemmer.py). I cut out the first 1000 words of each text to remove the Project Gutenberg metadata, and then select the first 500000 characters from the book for preparation [here](src/features/clean_book.py). Once the texts have been cleaned (stopwords removed, punctuation removed, made lowercase), I feed them into a TFIDF vectorizor which ignores infrequent (<10%) and frequent (>80%) and includes bigrams. Look in [here](notebooks/gutenberg_proj4_notebook.ipynb) for TFIDF vectorization.
 
---------
-
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+Modeling and Flask App
+==============================
+I employ LSA and NMF clustering to the tfidf vectorized texts.  The results can be seen towards the end of [this notebook](notebooks/gutenberg_proj4_notebook.ipynb). I then store the strength of expression of each document topic so it can be used to find the top 3 most similar books using cosine similarity. <br>
+The [flask app](src/visualization/flask_app/main.py) takes in a snippet of a book from the user, then uses the [cosine_recommender](src/visualization/flask_app/main.py) function to return the 3 most similar books.
