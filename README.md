@@ -14,5 +14,5 @@ I use Spacy to tag the text with part of speech and [lemmatize](./src/features/s
 
 Modeling and Flask App
 ==============================
-I employ LSA and NMF clustering to the tfidf vectorized texts.  The results can be seen towards the end of [this notebook](notebooks/gutenberg_proj4_notebook.ipynb). I then store the strength of expression of each document topic so it can be used to find the top 3 most similar books using cosine similarity. <br>
+I employ LSA and NMF clustering to the tfidf vectorized texts.  The results can be seen towards the end of [this notebook](notebooks/gutenberg_notebook.ipynb). I then store the strength of expression of each document topic so it can be used to find the top 3 most similar books using cosine similarity. <br>
 The [flask app](src/visualization/flask_app/main.py) takes in a snippet of a book from the user, then uses the [cosine_recommender](src/visualization/flask_app/main.py) function to return the 3 most similar books.
