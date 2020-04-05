@@ -5,7 +5,7 @@ gutenberg_recommender
 
 Data
 ==============================
-The data for this project includes a selection of the Top 100 books read on Project Gutenberg as tracked in February 2019.  The text of these books were scraped from the site using Selenium (at a respectful ping rate) and beautiful soup. The raw book text was then stored in a Mongo database. See [here](notebooks/Gut_scrape.ipynb') for the associated code.
+The data for this project includes a selection of the Top 100 books read on Project Gutenberg as tracked in February 2019.  The text of these books were scraped from the site using Selenium (at a respectful ping rate) and beautiful soup. The raw book text was then stored in a Mongo database. See [here](notebooks/Gut_scrape.ipynb) for the associated code.
 
 Text Preparation
 ==============================
