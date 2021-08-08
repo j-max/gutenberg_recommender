@@ -1,11 +1,21 @@
 gutenberg_recommender
 ==============================
 
+The code in this repository will use supervised learning predict the author of a sentence.  When the model is trained, a user will be able to write a sentence, input it into a web application, and learn which author the sentence most resembles. 
+
+The initial goal of this model will be to predict a sentence's author correctly 75% of the time. In other words, I will first aim to achieve a model **accuracy of .75.**
+
 > The goal of this project is to use natural language processing to make [Project Gutenberg](https://www.gutenberg.org/) reading recommendations.  Project Gutenberg is an online source of free eBooks. The end product is a Flask app which allows a user to submit a snippet of text and recieve three texts that they might enjoy reading for free on Project Gutenberg. 
 
 Data
 ==============================
-The data for this project includes a selection of the Top 100 books read on Project Gutenberg as tracked in February 2019.  The text of these books were scraped from the site using Selenium (at a respectful ping rate) and beautiful soup. The raw book text was then stored in a Mongo database. See [here](notebooks/Gut_scrape.ipynb) for the associated code.
+The initial models in this repository were trained on the Project Gutenberg Corpus packaged in the NLTK Gutenberg corpus. 
+Look into the [data preprocessing folder](./notebooks/preprocessing') to see how the texts were prepared for analysis and modeling.
+
+
+The data for this project includes a selection of the Top 100 books read on Project Gutenberg as tracked in February 2019. 
+
+The text of these books were scraped from the site using Selenium (at a respectful ping rate) and Beautiful Soup. The raw book text was then stored in a Mongo database. See [here](notebooks/Gut_scrape.ipynb) for the associated code.
 
 Text Preparation
 ==============================
